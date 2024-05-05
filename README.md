@@ -24,8 +24,6 @@
       for <a href="https://neovim.io/">Neovim</a> 
     </strong>
   </p>
-</div>
-<!-- markdownlint-restore -->
 
 [![Neovim][neovim-shield]][neovim-url]
 [![Nix][nix-shield]][nix-url]
@@ -33,6 +31,8 @@
 
 [![GPL2 License][license-shield]][license-url]
 [![Issues][issues-shield]][issues-url]
+</div>
+<!-- markdownlint-restore -->
 
 ![](https://github.com/nix-community/kickstart-nix.nvim/assets/12857160/84faa268-82de-4401-acf3-efddc26dd58a)
 
@@ -87,7 +87,7 @@ for maximum flexibility.
 
 ## :bicyclist: Test drive
 
-If you have Nix installed (with [flakes](https://nixos.wiki/wiki/Flakes) enabled),
+If you have Nix installed (with [flakes](https://wiki.nixos.org/wiki/Flakes) enabled),
 you can test drive this by running:
 
 ```console
