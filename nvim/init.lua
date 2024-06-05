@@ -101,6 +101,11 @@ g.editorconfig = true
 
 vim.opt.colorcolumn = '100'
 
+local themeOk, _ = pcall(vim.cmd, 'colorscheme rose-pine')
+if not themeOk then
+  vim.cmd 'colorscheme default' -- if the above fails, then use default
+end
+
 -- Native plugins
 cmd.filetype('plugin', 'indent', 'on')
 cmd.packadd('cfilter') -- Allows filtering the quickfix list with :cfdo
