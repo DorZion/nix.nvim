@@ -96,7 +96,7 @@ g.editorconfig = true
 
 vim.opt.colorcolumn = '100'
 
-local themeOk, _ = pcall(vim.cmd, 'colorscheme rose-pine')
+local themeOk, _ = pcall(vim.cmd, 'colorscheme catppuccin-mocha')
 if not themeOk then
   vim.cmd 'colorscheme default' -- if the above fails, then use default
 end
