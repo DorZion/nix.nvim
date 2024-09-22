@@ -32,8 +32,10 @@ with lib;
     withSqlite ? true, # Add sqlite? This is a dependency for some plugins
     # You probably don't want to create vi or vim aliases
     # if the appName is something different than "nvim"
-    viAlias ? appName == "nvim", # Add a "vi" binary to the build output as an alias?
-    vimAlias ? appName == "nvim", # Add a "vim" binary to the build output as an alias?
+    # Add a "vi" binary to the build output as an alias?
+    viAlias ? appName == null || appName == "nvim",
+    # Add a "vim" binary to the build output as an alias?
+    vimAlias ? appName == null || appName == "nvim",
   }: let
     # This is the structure of a plugin definition.
     # Each plugin in the `plugins` argument list can also be defined as this attrset
@@ -97,11 +99,17 @@ with lib;
       '';
 
       installPhase = ''
-        cp -r after $out/after
-        rm -r after
         cp -r lua $out/lua
         rm -r lua
-        cp -r * $out/nvim
+        # Copy nvim/after only if it exists
+        if [ -d "after" ]; then
+            cp -r after $out/after
+            rm -r after
+        fi
+        # Copy rest of nvim/ subdirectories only if they exist
+        if [ ! -z "$(ls -A)" ]; then
+            cp -r -- * $out/nvim
+        fi
       '';
     };
 
@@ -199,4 +207,8 @@ with lib;
         + lib.optionalString isCustomAppName ''
           mv $out/bin/nvim $out/bin/${lib.escapeShellArg appName}
         '';
+      meta.mainProgram 
+        = if isCustomAppName 
+            then appName 
+            else oa.meta.mainProgram;
     })
